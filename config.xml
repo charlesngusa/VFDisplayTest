@@ -5,7 +5,7 @@
         VF Quick Display panel for user to control VF equipment
     </description>
     <author email="support@newglobalinc.com" href="http://www.newglobalinc.com">
-        New Global Technology Team
+        New Global Technology
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
@@ -30,6 +30,7 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
+	<plugin name="phonegap-plugin-barcodescanner" />
 	<!-- add a version here, otherwise PGB will use whatever the latest version of the package on npm is -->
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
