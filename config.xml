@@ -35,6 +35,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
 	<plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~6.0.8"/>
 	<!-- add a version here, otherwise PGB will use whatever the latest version of the package on npm is -->
+	<icon src="www/img/icon.png" />
     <platform name="android">
     <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
