@@ -30,7 +30,7 @@
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
-	<plugin name="phonegap-plugin-barcodescanner" />
+	<plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~6.0.8"/>
 	<!-- add a version here, otherwise PGB will use whatever the latest version of the package on npm is -->
     <platform name="android">
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
@@ -85,7 +85,9 @@
 	<!-- next 2 lines, disable the splash screen -->
 	<preference name="SplashScreenDelay" value="0"/>
 	<preference name="FadeSplashScreenDuration" value="0"/>
-	
+	<!-- need next line for android compatibility with older version-->
+	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
+
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
