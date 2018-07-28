@@ -7,7 +7,7 @@
     <author email="support@newglobalinc.com" href="http://www.newglobalinc.com">
         New Global Technology
     </author>
-    <content src="www/index.html" />
+    <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
 	<!-- need next line for android compatibility with older version-->
