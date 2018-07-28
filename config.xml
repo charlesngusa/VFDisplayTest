@@ -42,7 +42,7 @@
 	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
 	<!-- add a version here, otherwise build.phonegap will use whatever the latest version of the package on npm is -->
-	<icon src="img/icon.png" />
+	<icon src="www/img/icon.png" />
 	<platform name="android">
 
    <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
