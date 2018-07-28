@@ -14,9 +14,9 @@
 	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
-	<preference name="phonegap-version" value="cli-6.5.0" />
 
 	<!-- these lines are supposed to fix the icon problem 
+	<preference name="phonegap-version" value="cli-6.5.0" />
 	<plugin name="cordova.plugins.diagnostic" spec="~3.7.1" />
 	-->
    <!--<plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
@@ -42,8 +42,9 @@
 	<!-- in some version , the whitelist will include the barcodescanner -->
 	<plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~6.0.8"/>
 	<!-- add a version here, otherwise build.phonegap will use whatever the latest version of the package on npm is -->
- 	<icon src="www/img/icon.png" />
 	<platform name="android">
+	 	<icon src="www/img/icon.png" />
+
    <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
