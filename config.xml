@@ -12,9 +12,9 @@
     <preference name="android-minSdkVersion" value="14" />
 	<!-- need next line for android compatibility with older version-->
 	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
-
+	<preference name="phonegap-version" value="cli-7.1.0" />
 	<!-- these lines are supposed to fix the icon problem 
-	<preference name="phonegap-version" value="cli-6.5.0" />
+
 	<plugin name="cordova.plugins.diagnostic" spec="~3.7.1" />
 	-->
    <!--<plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
