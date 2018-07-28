@@ -7,7 +7,7 @@
     <author email="support@newglobalinc.com" href="http://www.newglobalinc.com">
         New Global Technology
     </author>
-    <content src="index.html" />
+    <content src="index.html" />	<!-- i don't know why this src cannot have www, though www/index.html is where it is -->
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
 	<!-- need next line for android compatibility with older version-->
@@ -42,7 +42,7 @@
 	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
 	<!-- add a version here, otherwise build.phonegap will use whatever the latest version of the package on npm is -->
-	<icon src="www/img/icon.png" />
+	<icon src="img/icon.png" />
 	<platform name="android">
 
    <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
