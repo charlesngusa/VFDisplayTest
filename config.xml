@@ -14,8 +14,9 @@
 	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
-	<!-- these lines are supposed to fix the icon problem 
 	<preference name="phonegap-version" value="cli-7.1.0" />
+
+	<!-- these lines are supposed to fix the icon problem 
 	<plugin name="cordova.plugins.diagnostic" spec="~3.7.1" />
 	-->
    <!--<plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
