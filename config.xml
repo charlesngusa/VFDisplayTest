@@ -13,10 +13,7 @@
 	<!-- need next line for android compatibility with older version-->
 	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 	<preference name="phonegap-version" value="cli-7.1.0" />
-	<!-- these lines are supposed to fix the icon problem 
 
-	<plugin name="cordova.plugins.diagnostic" spec="~3.7.1" />
-	-->
    <!--<plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -36,13 +33,14 @@
     <plugin name="cordova-plugin-splashscreen" source="npm" spec="~3.2.1" />
     <plugin name="cordova-plugin-statusbar" source="npm" spec="~2.1.2" />
     <plugin name="cordova-plugin-vibration" source="npm" spec="~2.1.0" />
+	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
 	-->
 	<!-- in some version , the whitelist will include the barcodescanner -->
 	<plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~6.0.8"/>
-	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
+	<plugin name="cordova-plugin-media" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
 	<!-- add a version here, otherwise build.phonegap will use whatever the latest version of the package on npm is -->
-	<icon src="www/img/icon.png" />
+	<icon src="www/img/icon.png" />	<!-- this src has to have www, or else run under cli 7.1.0 will give error msg that src cannot be found -->
 	<platform name="android">
 
    <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
