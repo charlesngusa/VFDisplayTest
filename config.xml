@@ -15,7 +15,7 @@
 	<preference name="AndroidPersistentFileLocation" value="Compatibility" />
 	<plugin name="cordova-plugin-dialogs" source="npm" spec="~1.2.0" />
  	<plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" /> <!-- need this for internet to work in android -->
-	<plugin name="cordova.plugins.diagnostic" spec="~3.6.8" />
+	<plugin name="cordova.plugins.diagnostic" spec="~3.7.1" />
    <!--<plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
