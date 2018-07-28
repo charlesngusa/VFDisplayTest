@@ -167,12 +167,10 @@
 	}
 	
 	function playBeep() {
-		var my_media = new Media("beep.wav",
-				// success callback
+		var my_media = new Media("beep.wav"); /*,
 				 function () { console.log("playAudio():Audio Success"); },
-				// error callback
-				 function (err) { console.log("playAudio():Audio Error: " + err); }
-		); 
+				 function (err) { console.log("playAudio():Audio Error: " + err); } ); */
+		my_media.setVolume('0.7');
 		my_media.play();
 	}
 	
