@@ -38,7 +38,7 @@
 	<!-- in some version , the whitelist will include the barcodescanner -->
 	<plugin name="phonegap-plugin-barcodescanner" source="npm" spec="~6.0.8"/>
 	<!-- add a version here, otherwise build.phonegap will use whatever the latest version of the package on npm is -->
- 	<icon src="img/icon.png" />
+ 	<icon src="www/img/icon.png" />
 	<platform name="android">
    <!--    <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
