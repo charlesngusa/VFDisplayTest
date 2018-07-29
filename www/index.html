@@ -180,7 +180,7 @@
 		cordova.plugins.barcodeScanner.scan(
 			function (result) {
 				//navigator.notification.beep(1);	// cli beep does not work
-				playBeep();			
+				//playBeep();			
 				post("http://" + mEquip_IP + "/stationstartrun", "tipid=" + result.text, scanResponse);
 				
 			},
