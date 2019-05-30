@@ -1,0 +1,230 @@
+<!--
+// Description: UI to wifi interface with VF equip A, use PhoneGap Build to generate code for Android and iOS
+// Owner: Charles Ng
+// Release Procedure:
+// 7/28/2017 support both Android and iOS code generation
+// - successfully use cli-6.5.0 to support Android (if I use 6.5.0 to support iOS then the generic icon file, and play
+// - media file do not work), 
+// - successfully use cli-7.1.0 to support iOS (if I use 7.1.0 to support Android then I need 
+// - plug-in "cordova-android-support-gradle-release", but it adds a lot of extra code size and access priviledges)
+
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <!--<meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="css/index.css" />-->
+    <title>VFQuickDisplay</title>
+	<style>
+		div.hidden {
+			display: none;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="body1" style="text-align:center"> <!-- class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+		<h2>VF Quick Display</h2>
+		<br><br>
+		<button id="scanButton" style="height:30px; width:100px; background-color:#A6EAEE" class="btn btn-primary btn-lg" >Scan Tip ID</button>
+		<br><br>
+		<button id="statusButton" style="height:30px; width:100px; background-color:#A6EAEE" class="btn btn-primary btn-lg">Status</button>
+		<br><br>
+		<button id="setup" style="height:30px; width:100px; background-color:#A6EAEE" 
+			onclick="initializeBody2()" 
+			class="btn btn-primary btn-lg" >Set Up</button>		
+		<br><br>
+		<p id="msgline1" style="text-align:left"></p>
+	</div>
+	<div id="body2" style="text-align:center" class="hidden"> <!-- class="col-xs-6 col-sm-6 col-md-6 col-lg-6"> -->
+		<h2>Set Up</h2>
+		<br><br>
+		<div style="text-align:left">
+			<p>Connect this mobile device to WiFi VenusForever... before using AUTO SET.</p>
+			<table border="0" cellpadding="0" cellspacing="6">
+			<tr>
+				<td>
+				<button type="button" style="height:30px; width:100px; background-color:#A6EAEE">Equip IP</button><span>  </span>
+				</td>
+				<td>
+				<input id="equipIPinput" style="height:24px">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<button type="button" onclick="ClickAutoSet()" align="left" style="height:30px; width:100px; background-color:#A6EAEE">AUTO SET</button>
+				</td>
+				<td>
+				Click to detect Equip IP.
+				</td>
+			</tr>
+			<tr>
+				<td>
+				<button type="button" onclick="ClickSaveIP()" style="height:30px; width:100px; background-color:#A6EAEE">SAVE</button>
+				</td>
+				<td>
+				After save, connect this device to your regular WiFi to use your VF equip.
+				</td>
+			</tr>
+			</table>
+		</div>
+		<p id="msgline2" style="text-align:left"></p>
+	</div>
+	<br>
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <!--<script type="text/javascript" src="js/index.js"></script>-->
+    <script type="text/javascript">
+	var mEquip_IP = "2.4.6.8"; // "192.168.0.76";
+	var equipHomeURL = "2.4.6.8";
+	var key_equipIP = "equipIP";	// key name for saving the IP address in temporary data storage
+	var scanResponse = 1;
+	var statusResponse = 2;
+	var autoSetResponse = 3;
+	
+	function initializeBody2() {
+		mEquip_IP = localStorage.getItem(key_equipIP);		// restore from temp storage
+		if (mEquip_IP == null) mEquip_IP = '';
+		document.getElementById("equipIPinput").value = mEquip_IP;
+		document.getElementById('body2').style.display = 'block'; document.getElementById('body1').style.display = 'none';
+	}
+	
+	function ClickSaveIP() {
+		var input = document.getElementById("equipIPinput").value;
+		var addr = input.split(".");
+		if (addr.length == 4) {
+			mEquip_IP = input;
+			localStorage.setItem(key_equipIP, input);
+			document.getElementById("msgline1").innerHTML = "Saved Equip IP: " + mEquip_IP + "<br>";		
+		} else {
+			document.getElementById("msgline1").innerHTML = "Equip IP: " + mEquip_IP + "<br>";		
+		}
+		document.getElementById('body1').style.display = 'block'; document.getElementById('body2').style.display = 'none';
+	}
+	
+	function ClickAutoSet() {
+		post("http://" + equipHomeURL + "/getEquipIP", "", autoSetResponse);
+
+	}
+	
+	function showStatus(response) {
+		var temp1 = "", temp2="", humid = "", remain="", devID="";
+		var pairs = response.split("&");
+		var pair, keyValue;
+		for (var i=0; i<pairs.length; i++) {
+			pair = pairs[i];
+			keyValue = pair.split("=");
+			if (keyValue[0] == "temp1") temp1 = keyValue[1];
+			else if (keyValue[0] == "temp2") temp2 = keyValue[1];
+			else if (keyValue[0] == "humid") humid = keyValue[1];
+			else if (keyValue[0] == "remain") remain = keyValue[1];
+			else if (keyValue[0] == "devID") devID = keyValue[1];
+		}
+		if (remain == "" || remain == "0") {
+			document.getElementById("msgline1").innerHTML = "Not Running.<br><br>" + "Temp: " 
+				+ temp2 + "C    Humid: " + humid + "%<br><br>"
+				+ "Equip Temp: " + temp1 ;
+		} else {
+			document.getElementById("msgline1").innerHTML = "Running. Remaining Time: " + remain + "<br><br>Tip ID: " + devID +
+				"<br><br>Temp: " + temp2 + "C    Humid: " + humid + "%<br><br>"
+				+ "Equip Temp: " + temp1 ;
+		}	
+	}
+	
+	function showPostResponse(response) {
+		if (response == "invalid") {
+			document.getElementById("msgline1").innerHTML = "Your submitted ID is not valid.";
+		} else if (response == "valid") {
+			document.getElementById("msgline1").innerHTML = "Your submitted ID is accepted, equipment is ready for use.";
+			post("http://" + mEquip_IP + "/stationGetStatus", "", statusResponse);
+		} if (response == "used") {
+			document.getElementById("msgline1").innerHTML = "Your ID has been submitted before, it cannot extend the run time.";
+		}
+    }
+
+	function post(url, input, responseType) {
+		// shouldBeAsync = true. or else, it'll block ALL execution waiting for server response.
+		var shouldBeAsync = true;
+		var request = new XMLHttpRequest();
+		request.onload = function () {
+			if (responseType == scanResponse) {
+				//var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+				//document.getElementById("msgline1").innerHTML += request.responseText + "<br>";
+				showPostResponse(request.responseText);
+			} else if (responseType == statusResponse) {
+				//var status = request.status; // HTTP response status, e.g., 200 for "200 OK"
+				showStatus(request.responseText);
+			} else if (responseType == autoSetResponse) {
+				var response = request.responseText;
+				//document.getElementById("msgline2").innerHTML = response; 
+				var addr = response.split(".");
+				if (addr.length == 4) {
+					mEquip_IP = response;		
+					document.getElementById("equipIPinput").value = mEquip_IP;
+				}
+			}
+		}
+		
+		request.open("POST", url, shouldBeAsync);
+		request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=utf-8"); 
+			// "application/json;charset=UTF-8"); "text/plain;charset=UTF-8");
+		request.send(input); // postData);	
+		//alert("Scan Result: " + result.text + "\n" + "Format: " + result.format + "\n" +
+		//	"Cancelled: " + result.cancelled);
+	}
+	
+	// this function needs cli 7.1.0 to work, iOS needs this function to beep
+	function playBeep() {
+		var my_media = new Media("beep.wav"); 
+				 //function () { console.log("playAudio():Audio Success"); },
+				 //function (err) { console.log("playAudio():Audio Error: " + err); } ); 
+		my_media.setVolume('0.7');
+		my_media.play();
+	}
+	
+	var ClickDoScan = document.getElementById("scanButton");
+	ClickDoScan.onclick = function() { 					
+		
+		cordova.plugins.barcodeScanner.scan(
+			function (result) {
+				post("http://" + mEquip_IP + "/stationstartrun", "tipid=" + result.text, scanResponse);
+				//navigator.notification.beep(1);	// cli beep does not work
+				playBeep();			
+				
+			},
+			function (error) {
+			  alert("Scanning failed: " + error);
+			},
+			{
+			  preferFrontCamera : false, // iOS and Android, false means the camera facing away from user
+			  showFlipCameraButton : false, // iOS and Android
+			  showTorchButton : false, // iOS and Android
+			  torchOn: false, // launch with the torch (flash light) switched on (if available)
+			  saveHistory: true, // Android, save scan history (default false)
+			  prompt : "Place scan code inside the scan area", // Android
+			  resultDisplayDuration: 500, // Android, display scanned text for X ms. 0 suppresses it entirely, default 1500
+			  // formats : "QR_CODE,PDF_417", // default: all but PDF_417 and RSS_EXPANDED
+			  orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+			  disableAnimations : true, // iOS
+			  disableSuccessBeep: false // iOS and Android
+			}
+		);
+			
+	}
+
+	var ClickGetStatus = document.getElementById("statusButton");
+	ClickGetStatus.onclick = function() { 					
+		post("http://" + mEquip_IP + "/stationGetStatus", "", statusResponse);
+	}	
+
+	<!--app.initialize();-->
+    </script>
+	
+
+</body>
+
+</html>
